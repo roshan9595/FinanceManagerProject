@@ -13,8 +13,7 @@ import Login from './Pages/login';
 
 export default class App extends Component<Props> {
 
-   
-  render() {
+   render() {
     return (
         <Login/>
     );

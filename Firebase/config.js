@@ -1,15 +1,19 @@
-import firebase from 'firebase';
-const config = {
-    apiKey: "AIzaSyBaOXkb4NBTboxxQBXesO5MtXWIFLZihA4",
-    authDomain: "financemanager-1d039.firebaseapp.com",
-    databaseURL: "https://financemanager-1d039.firebaseio.com",
-    projectId: "financemanager-1d039",
-    storageBucket: "financemanager-1d039.appspot.com",
-    messagingSenderId: "1053605504948"
-   };
+import * as firebase from 'firebase';
+import * as constant from "./constants"
 
-	if (!firebase.apps.length) {
-	  const Firebase =   firebase.initializeApp(config);
-	}
-    
- export default Firebase;   
+// Initialize Firebase
+const config = {
+    apiKey: constant.FIREBASE_API_KEY,
+    authDomain: constant.FIREBASE_AUTH_DOMAIN,
+    databaseURL: constant.FIREBASE_DATABASE_URL,
+    projectId: constant.FIREBASE_PROJECT_ID,
+    storageBucket: constant.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: constant.FIREBASE_MESSAGING_SENDER_ID
+};
+
+
+    firebase.initializeApp(config);
+
+export const database = firebase.database();
+export const auth = firebase.auth();
+export const storage = firebase.storage();
