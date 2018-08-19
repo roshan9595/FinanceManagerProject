@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {Button,TextInput,StyleSheet, Text, View,Alert} from 'react-native';
-import Login from './login';
-import { createStackNavigator } from 'react-navigation';
 import {auth} from '../Firebase/config';
+import { addEmployeeToDB,employeeObj } from '../Firebase/DBDetails/employeeDB';
 
 
 export default class SignUp extends React.Component {
@@ -10,19 +9,27 @@ export default class SignUp extends React.Component {
    constructor(props) {
     super(props);
     this.state = {
-    FirstName:'',
-    LastName:'',
+    EmployeeId:'EE001',
+    Name:'',
     EmailId: '',
     password:'',
     errorMessage:null,
     };
    }  
 
+   saveEmployeeDB = () => {
+    employeeObj.id = this.state.EmployeeId
+    employeeObj.name = this.state.Name
+    employeeObj.EmailId = this.state.EmailId
+    addEmployeeToDB(employeeObj); 
+    this.props.navigation.navigate('MainScreen');
+   }
+
   handleSignUp = () => {
     const { EmailId, password } = this.state
     auth
       .createUserWithEmailAndPassword(EmailId, password)
-      .then(user => this.props.navigation.navigate('MainScreen'))
+      .then(user => this.saveEmployeeDB())
       .catch(error => this.setState({ errorMessage: error.message }))
     }
 
@@ -38,16 +45,16 @@ export default class SignUp extends React.Component {
               {this.state.errorMessage}
               </Text>}
                 <TextInput style={styles.textInput}
-                onChangeText={(FirstName) => this.setState({FirstName})}
-                  placeholder = 'First Name'
+                onChangeText={(EmployeeId) => this.setState({EmployeeId})}
+                  placeholder = 'Employee Id'
                   returnKeyType = {"next"}
-                  onSubmitEditing={() => { this.password.focus(); }}
+                  onSubmitEditing={() => { this.Name.focus(); }}
                   />
                 <TextInput style={styles.textInput}
-                onChangeText={(LastName) => this.setState({LastName})}
-                  placeholder = 'Last Name'
+                onChangeText={(Name) => this.setState({Name})}
+                  placeholder = 'Name'
                   returnKeyType = {"next"}
-                  onSubmitEditing={() => { this.password.focus(); }}
+                  onSubmitEditing={() => { this.EmailId.focus(); }}
                  
                     />        
                 <TextInput style={styles.textInput}

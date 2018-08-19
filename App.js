@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import Login from './Pages/login';
+import { RootStack } from './app/Routes/routes';
 
 
 
@@ -15,7 +15,7 @@ export default class App extends Component<Props> {
 
    render() {
     return (
-        <Login/>
+        <RootStack/>
     );
   }
  

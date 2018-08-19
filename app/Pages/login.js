@@ -1,15 +1,9 @@
-
-
 import React, {Component} from 'react';
-import {Button,TextInput,StyleSheet, Text, View,Alert} from 'react-native';
-import SignUp from './signup';
-import Main from './main';
-import { createStackNavigator } from 'react-navigation';
+import {Button,TextInput,StyleSheet, BackHandler, Text, View,Alert} from 'react-native';
 import {auth} from '../Firebase/config';
 
 
-
-class Login extends React.Component {
+export default class Login extends React.Component {
 
 	
    constructor(props) {
@@ -21,6 +15,19 @@ class Login extends React.Component {
    
   }  
 
+  handleHardwareBackButton = () => {
+    BackHandler.exitApp()
+  return true;
+};
+  componentDidMount() {
+   BackHandler.addEventListener('hardwareBackPress', this.handleHardwareBackButton);
+  }
+
+  componentWillUnmount() {
+  BackHandler.removeEventListener('hardwareBackPress', this.handleHardwareBackButton);
+}
+
+   
   handleLogin = () => {
      const { EmailId, password } = this.state
       auth
@@ -67,30 +74,6 @@ class Login extends React.Component {
     );
   }
 }
-
-export default createStackNavigator({
-  LoginScreen: {
-    screen: Login,
-    navigationOptions:{
-    header: null,
-	}
-  },
-  SignUpScreen:{
-  	screen: SignUp,
-  	navigationOptions:{
-    headerLeft: null,
-    header: null,
-	}
-  },
-  MainScreen:{
-  	screen: Main,
-  	navigationOptions:{
-  	header: null,
-    headerLeft: null,
-	}
-  },
-
-});
 
 const styles = StyleSheet.create({
   container: {
