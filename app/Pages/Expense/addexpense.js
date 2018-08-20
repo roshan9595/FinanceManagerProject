@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Button,TextInput,StyleSheet, Text, View,Alert} from 'react-native';
-import { createStackNavigator } from 'react-navigation';
-import {auth} from '../../Firebase/config';
+import DatePicker from 'react-native-datepicker';
+
+
 import { addExpenseToDB,expenseObj } from '../../Firebase/DBDetails/expenseDB';
 
 
@@ -39,15 +40,23 @@ export default class Expense extends React.Component {
                 onChangeText={(Name) => this.setState({Name})}
                   placeholder = 'Expense'
                   returnKeyType = {"next"}
-                  onSubmitEditing={() => { this.Date.focus(); }}
-                  />
-                <TextInput style={styles.textInput}
-                onChangeText={(Date) => this.setState({Date})}
-                  placeholder = 'Date'
-                  returnKeyType = {"next"}
-                  onSubmitEditing={() => { this.Amount.focus(); }}
-                 
-                    />          
+                />
+                <DatePicker
+                    style ={styles.DateInput}
+                    date={this.state.Date}
+                    mode="date"
+                    format="YYYY-MM-DD"
+                    placeholder = 'Date'
+                    returnKeyType = {"next"}
+                    minDate="2016-05-01"
+                    showIcon={false}
+                    customStyles={{
+                     dateInput: {
+                        alignItems : 'flex-start',
+                        padding:5
+                    },
+                   }}
+                  onDateChange={(Date) => {this.setState({Date: Date});}}/>         
                 <TextInput style={styles.textInput}
                 onChangeText={(Amount) => this.setState({Amount})}
                   placeholder = 'Amount'
@@ -75,6 +84,15 @@ const styles = StyleSheet.create({
   },
   textInput:{
   	borderColor:'black',
+    backgroundColor:'#D3D3D3',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderRadius: 4,
+    margin:10,
+  },
+  DateInput:{
+    width:'95%',
+    borderColor:'black',
     backgroundColor:'#D3D3D3',
     borderWidth: 1,
     borderStyle: 'solid',

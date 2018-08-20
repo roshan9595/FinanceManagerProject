@@ -3,7 +3,7 @@ import {StyleSheet,FlatList,Text,View,} from 'react-native';
 import {Header,Right,Left,Icon} from 'native-base';
 import { List,ListItem} from "react-native-elements";
 
-
+import { fetchAllExpensesByEmployeeId } from '../../Firebase/DBDetails/expenseDB';
 
 export default class ExpenseList extends React.Component {
 
@@ -21,7 +21,10 @@ export default class ExpenseList extends React.Component {
   }
 
    componentDidMount() {
-    this.makeRemoteRequest();
+    
+    this.setState({ data : fetchAllExpensesByEmployeeId("EE001") });
+    console.log(fetchAllExpensesByEmployeeId("EE001"))
+    console.log(this.state.data)
   }
 
   makeRemoteRequest = () => {
@@ -75,8 +78,8 @@ export default class ExpenseList extends React.Component {
          data={this.state.data}
          renderItem={({item}) => (
           <ListItem
-          title={item.name.first}
-          subtitle={item.email}
+          title={item.Expense}
+          subtitle={item.Amount}
           containerStyle={{ borderBottomWidth: 0 }}
           />
           )}

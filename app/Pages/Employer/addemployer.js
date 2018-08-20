@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import {Button,TextInput,StyleSheet, Text, View,Alert} from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+
+
 import { addEmployerToDB,employerObj } from '../../Firebase/DBDetails/employerDB';
 import { addSalaryToDB,salaryObj } from '../../Firebase/DBDetails/salaryDB';
+
+import DatePicker from 'react-native-datepicker';
 
 
 export default class Employer extends React.Component {
@@ -56,12 +59,23 @@ export default class Employer extends React.Component {
                 onChangeText={(EmailId) => this.setState({EmailId})}
                   placeholder = 'EmailId'
                   returnKeyType = {"next"}
-                  />           
-                <TextInput style={styles.textInput}
-                onChangeText={(startDate) => this.setState({startDate})}
-                  placeholder = 'startDate'
-                  returnKeyType = {"next"}
                   />
+                <DatePicker
+                    style ={styles.DateInput}
+                    date={this.state.startDate}
+                    mode="date"
+                    format="YYYY-MM-DD"
+                    placeholder = 'StartDate'
+                    returnKeyType = {"next"}
+                    minDate="2016-05-01"
+                    showIcon={false}
+                    customStyles={{
+                     dateInput: {
+                        alignItems : 'flex-start',
+                        padding:5
+                    },
+                   }}
+                  onDateChange={(startDate) => {this.setState({startDate: startDate});}}/>             
                 <TextInput style={styles.textInput}
                 onChangeText={(Salary) => this.setState({Salary})}
                   placeholder = 'Salary'
@@ -94,6 +108,15 @@ const styles = StyleSheet.create({
   },
   textInput:{
   	borderColor:'black',
+    backgroundColor:'#D3D3D3',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderRadius: 4,
+    margin:10,
+  },
+  DateInput:{
+    width:'95%',
+    borderColor:'black',
     backgroundColor:'#D3D3D3',
     borderWidth: 1,
     borderStyle: 'solid',

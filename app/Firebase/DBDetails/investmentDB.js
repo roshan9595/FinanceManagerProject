@@ -4,7 +4,7 @@ export const investmentObj = {employeeId:"", InvestorName:"",Date:"",Amount:""};
 
 export const addInvestmentToDB =  (employerObj) => {
     setTimeout(() => {
-            database.ref('investment/'+investmentObj.employeeId).set(investmentObj)
+            database.ref('investment/'+investmentObj.employeeId).push(investmentObj)
             .then(() => {
                 console.log('INSERTED !');
             }).catch((error) => {
@@ -13,13 +13,19 @@ export const addInvestmentToDB =  (employerObj) => {
         }, 5000);
 }
 
-export const fetchAllExpensesByEmployeeId =  (employeeId) => {
+export const fetchAllInvestmentByEmployeeId =  (employeeId) => {
 
-        var ref = database.ref('investment/').orderByChild('employeeId').equalTo(employeeId);
+        var ref = database.ref('investment/'+employeeId);
         ref.once('value', snapshot => {
            if (snapshot.exists()) {
-               employerObj = snapshot.val();
-               console.log(employerObj['EmailId'])
+               snapshot.forEach((child) => {
+               
+                  console.log("--")
+                  console.log(child.val().InvestorName)
+                  console.log(child.key)
+                  console.log("--")
+               
+              })
            } else {
               console.log('There is no user who has email like '+ employeeId)
            }

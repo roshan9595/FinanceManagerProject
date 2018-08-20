@@ -18,8 +18,14 @@ export const fetchSalaryByEmployerId =  (employerId) => {
         var ref = database.ref('salary/').orderByChild('employerId').equalTo(employerId);
         ref.once('value', snapshot => {
            if (snapshot.exists()) {
-               employerObj = snapshot.val();
-               console.log(employerObj['EmailId'])
+               snapshot.forEach((child) => {
+               
+                  console.log("--")
+                  console.log(child.val().salary)
+                  console.log(child.key)
+                  console.log("--")
+               
+              })
            } else {
               console.log('There is no user who has email like '+ employerId)
            }

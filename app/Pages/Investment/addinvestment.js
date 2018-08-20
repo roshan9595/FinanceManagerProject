@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Button,TextInput,StyleSheet, Text, View,Alert} from 'react-native';
-import {auth} from '../../Firebase/config';
+import DatePicker from 'react-native-datepicker';
+
+
 import { addInvestmentToDB,investmentObj } from '../../Firebase/DBDetails/investmentDB';
 
 
@@ -39,11 +41,22 @@ export default class Investment extends React.Component {
                   placeholder = 'InvestorName'
                   returnKeyType = {"next"}
                   />
-                <TextInput style={styles.textInput}
-                onChangeText={(Date) => this.setState({Date})}
-                  placeholder = 'Date'
-                  returnKeyType = {"next"}
-                  />          
+                 <DatePicker
+                    style ={styles.DateInput}
+                    date={this.state.Date}
+                    mode="date"
+                    format="YYYY-MM-DD"
+                    placeholder = 'Date'
+                    returnKeyType = {"next"}
+                    minDate="2016-05-01"
+                    showIcon={false}
+                    customStyles={{
+                     dateInput: {
+                        alignItems : 'flex-start',
+                        padding:5
+                    },
+                   }}
+                  onDateChange={(Date) => {this.setState({Date: Date});}}/>          
                 <TextInput style={styles.textInput}
                 onChangeText={(Amount) => this.setState({Amount})}
                   placeholder = 'Amount'
@@ -77,5 +90,16 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     margin:10,
   },
+  DateInput:{
+    width:'95%',
+    borderColor:'black',
+    backgroundColor:'#D3D3D3',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderRadius: 4,
+    margin:10,
+  },
+  
+
  
 });

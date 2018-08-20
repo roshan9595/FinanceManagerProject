@@ -22,7 +22,7 @@ export default class SignUp extends React.Component {
     employeeObj.name = this.state.Name
     employeeObj.EmailId = this.state.EmailId
     addEmployeeToDB(employeeObj); 
-    this.props.navigation.navigate('MainScreen');
+    this.props.navigation.navigate('MainScreen',{ EmailId });
    }
 
   handleSignUp = () => {

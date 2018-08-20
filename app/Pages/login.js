@@ -32,7 +32,7 @@ export default class Login extends React.Component {
      const { EmailId, password } = this.state
       auth
       .signInWithEmailAndPassword(EmailId, password)
-      .then(() => this.props.navigation.navigate('MainScreen'))
+      .then(() => this.props.navigation.navigate('MainScreen',{ EmailId }))
       .catch(error => this.setState({ errorMessage: error.message }))
   }
 

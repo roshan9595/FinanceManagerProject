@@ -7,18 +7,41 @@ export const FIREBASE_PROJECT_ID = "financemanager-1d039";
 export const FIREBASE_STORAGE_BUCKET = "financemanager-1d039.appspot.com";
 export const FIREBASE_MESSAGING_SENDER_ID = "1053605504948";
 
-export const _storeData = async (userId) => {
+export const _storeEmployeeId = async (EmployeeId) => {
   try {
-    await AsyncStorage.setItem('UserId', userId);
+    await AsyncStorage.setItem('EmployeeID', EmployeeId);
   } catch (error) {
     // Error saving data
     console.log(error)
   }
 }
 
-export const _retrieveData = async () => {
+export const _retrieveEmployeeId = async () => {
   try {
-    const value = await AsyncStorage.getItem('UserId');
+    const value = await AsyncStorage.getItem('EmployeeID');
+    if (value !== null) {
+      // We have data!!
+      console.log(value);
+      return value;
+    }
+   } catch (error) {
+     // Error retrieving data
+     console.log(error)
+   }
+}
+
+export const _storeEmployeeMailId = async (EmailId) => {
+  try {
+    await AsyncStorage.setItem('EmailId', EmailId);
+  } catch (error) {
+    // Error saving data
+    console.log(error)
+  }
+}
+
+export const _retrieveEmployeeMailId = async () => {
+  try {
+    const value = await AsyncStorage.getItem('EmailId');
     if (value !== null) {
       // We have data!!
       console.log(value);

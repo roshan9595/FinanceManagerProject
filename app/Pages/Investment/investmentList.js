@@ -3,6 +3,8 @@ import {StyleSheet,FlatList,Text,View,} from 'react-native';
 import {Header,Right,Left,Icon} from 'native-base';
 import { List,ListItem} from "react-native-elements";
 
+import { fetchAllInvestmentByEmployeeId } from '../../Firebase/DBDetails/investmentDB';
+
 
 
 export default class InvestmentList extends React.Component {
@@ -22,6 +24,7 @@ export default class InvestmentList extends React.Component {
 
    componentDidMount() {
     this.makeRemoteRequest();
+    fetchAllInvestmentByEmployeeId("EE001")
   }
 
   makeRemoteRequest = () => {

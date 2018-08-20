@@ -16,13 +16,26 @@ export const addEmployerToDB =  (employerObj) => {
 export const fetchEmployerByEmployeeId =  (employeeId) => {
 
         var ref = database.ref('employer/').orderByChild('employeeId').equalTo(employeeId);
+        var employer = {}, employerList = [];
+        
         ref.once('value', snapshot => {
            if (snapshot.exists()) {
-               employerObj = snapshot.val();
-               console.log(employerObj['EmailId'])
+               snapshot.forEach((child) => {
+               
+                  
+                  employer = {}
+                  employer.id = child.val().id;
+                  employer.employerName = child.val().employerName;
+                  employer.EmailId = child.val().EmailId;
+                  employerList.push(employer);
+               
+              })
            } else {
               console.log('There is no user who has email like '+ employeeId)
            }
+           console.log("--")
+           console.log(employerList);
+           console.log("--")
     })
 
 }

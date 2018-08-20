@@ -4,6 +4,8 @@ import {Header,Right,Left,Icon} from 'native-base';
 import { List,ListItem} from "react-native-elements";
 
 import { fetchEmployerByEmployeeId } from '../../Firebase/DBDetails/employerDB';
+import { fetchSalaryByEmployerId } from '../../Firebase/DBDetails/salaryDB';
+
 
 export default class EmployerList extends React.Component {
 
@@ -23,6 +25,7 @@ export default class EmployerList extends React.Component {
    componentDidMount() {
     this.makeRemoteRequest();
     fetchEmployerByEmployeeId("EE001");
+    fetchSalaryByEmployerId("EE001")
   }
 
   makeRemoteRequest = () => {
@@ -77,6 +80,7 @@ export default class EmployerList extends React.Component {
          renderItem={({item}) => (
           <ListItem
           title={item.name.first}
+          subtitle={item.email}
           subtitle={item.email}
           containerStyle={{ borderBottomWidth: 0 }}
           />
