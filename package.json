@@ -1,0 +1,35 @@
+{
+  "name": "FinanceManager",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "firebase": "^5.0.3",
+    "link": "^0.1.5",
+    "modclean": "^3.0.0-beta.1",
+    "native-base": "^2.7.2",
+    "react": "16.4.1",
+    "react-native": "0.56.0",
+    "react-native-card-list": "^0.1.0",
+    "react-native-chart-kit": "^1.1.5",
+    "react-native-datepicker": "^1.7.2",
+    "react-native-elements": "^0.19.1",
+    "react-native-pie": "^0.5.0",
+    "react-native-pie-chart": "^1.0.13",
+    "react-native-svg": "^6.5.2",
+    "react-native-vector-icons": "^5.0.0",
+    "react-navigation": "^2.11.2"
+  },
+  "devDependencies": {
+    "babel-jest": "23.4.2",
+    "babel-preset-react-native": "5.0.2",
+    "jest": "23.5.0",
+    "react-test-renderer": "16.4.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
